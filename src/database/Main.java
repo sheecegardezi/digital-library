@@ -40,27 +40,34 @@ class Main {
 			System.out.println("Creating table in given database...");
 			statement = connection.createStatement();
 
-//			String sql = "CREATE TABLE researchPapers" + 
-//			"(id INTEGER not NULL, " + 
-//			" authors VARCHAR(255), " + 
-//			" title VARCHAR(500), " + 
-//			" keywords VARCHAR(500), " +
-//			" abstract VARCHAR(5000), " +
-//			" date INTEGER, " +
-//			" publisher VARCHAR(50), " +
-//			" PRIMARY KEY ( id ))";
-			
+			sql = "DROP TABLE researchPapers ";
+		    statement.executeUpdate(sql);  
+
+			sql = "CREATE TABLE researchPapers" + 
+			"(id INTEGER not NULL, " + 
+			" authors VARCHAR(255), " + 
+			" title VARCHAR(500), " + 
+			" keywords VARCHAR(500), " +
+			" abstract VARCHAR(8000), " +
+			" date INTEGER, " +
+			" publisher VARCHAR(50), " +
+			" PRIMARY KEY ( id ))";
+			statement.executeUpdate(sql);  
 			//String sql = "DROP TABLE researchPapers ";
 			//String sql = "INSERT INTO researchPapers " + "VALUES (1, 'authors', 'title', 'keywords' , 'abstract', 'date','publisher' )";
 			
 			DatabaseReader DR=new DatabaseReader();
 			
-			for(ResearchPaper research_paper:DR.getResearchPapers()){
-				sql = "INSERT INTO researchPapers " + "VALUES ("+ research_paper.getId()+"," +research_paper.getAuthor()+", "+research_paper.getTitle().replace(',', ' ')+", "+research_paper.getKeyword().replace(',', ' ')+" , "+research_paper.getAbstract().replace(',', ' ')+", "+research_paper.getDate()+","+research_paper.getPublisher()+" )";
-				break;				
+			for(ResearchPaper research_paper:DR.getResearchPapers()){				
+//				sql = "INSERT INTO researchPapers " + "VALUES (1, 'authors', 'title', 'keywords' , 'abstract', 'date','publisher' )";
+				sql = "INSERT INTO researchPapers " + "VALUES ("+ research_paper.getId()+",'"+research_paper.getAuthor()+"','"+research_paper.getTitle()+"','"+research_paper.getKeyword()+"','"+research_paper.getAbstract()+"',"+research_paper.getDate()+",'"+research_paper.getPublisher()+"')";
+				if(Integer.parseInt(research_paper.getId())>54){
+					System.out.println(sql);	
+				}
+				statement.executeUpdate(sql);
+			
 			}
 			
-			statement.executeUpdate(sql);
 			sql = "SELECT id, authors, title, keywords, abstract, date, publisher FROM researchPapers";
 			//STEP 5: Extract data from result set
 		    ResultSet rs = statement.executeQuery(sql);  
@@ -75,13 +82,13 @@ class Main {
 	          	String publisher = rs.getString("publisher");	
 	          	
 	            //Display values
-	            System.out.print("id: " + id);
-	            System.out.print(", authors: " + authors);
-	            System.out.print(", title: " + title);
-	            System.out.println(", keywords: " + keywords);
-	            System.out.println(", abstracts: " + abstracts);
-	            System.out.println(", date: " + date);
-	            System.out.println(", publisher: " + publisher);
+	            System.out.println("id: " + id);
+	            System.out.println("authors: " + authors);
+	            System.out.println("title: " + title);
+	            System.out.println("keywords: " + keywords);
+	            System.out.println("abstracts: " + abstracts);
+	            System.out.println("date: " + date);
+	            System.out.println("publisher: " + publisher);
 	            
 	            break;
 			}

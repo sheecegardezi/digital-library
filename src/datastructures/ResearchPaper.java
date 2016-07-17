@@ -15,10 +15,10 @@ public class ResearchPaper {
 	
 	public ResearchPaper(String Id,String Title,ArrayList<String> Authors,ArrayList<String> Keywords,String Abstract,String Date,String Publisher){
 		this.Id=Id;
-		this.Title=Title;
+		this.Title=Title.replace('\'', ' ').replace('\"', ' ');
 		this.Authors=Authors;
 		this.Keywords=Keywords;
-		this.Abstract=Abstract;
+		this.Abstract=Abstract.replace('\'', ' ').replace('\"', ' ');
 		this.Date=Date;
 		this.Publisher=Publisher;
 	}
@@ -47,7 +47,10 @@ public class ResearchPaper {
 		return Authors;
 	}
 	public String getAuthor() {
-		return Authors.get(0);
+		if(Authors.size()>0){
+			return Authors.get(0).replace('\'', ' ').replace('\"', ' ');
+		}
+		return "";
 	}
 
 	public void setAuthors(ArrayList<String> authors) {
@@ -58,7 +61,10 @@ public class ResearchPaper {
 		return Keywords;
 	}
 	public String getKeyword() {
-		return Keywords.get(0);
+		if(Keywords.size()>0){
+			return Keywords.get(0).replace('\'', ' ').replace('\"', ' ');
+		}
+		return "";
 	}
 	public void setKeywords(ArrayList<String> keywords) {
 		Keywords = keywords;
@@ -82,8 +88,8 @@ public class ResearchPaper {
 
 	@Override
 	public String toString() {
-		return "ResearchPaper [Id=" + Id + ", Title=" + Title + ", Authors=" + Authors + ", Keywords=" + Keywords
-				+ ", Abstract=" + Abstract + ", Date=" + Date + "Publisher"+Publisher +"]";
+		return "ResearchPaper [Id=" + Id +'\n'+ ", Title=" + Title +'\n'+ ", Authors=" + Authors +'\n'+ ", Keywords=" + Keywords
+				+'\n'+ ", Abstract=" + Abstract +'\n'+ ", Date=" + Date +'\n'+ "Publisher"+Publisher +'\n'+"]";
 	}
 
 	public String getPublisher() {
