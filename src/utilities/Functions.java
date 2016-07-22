@@ -1,6 +1,9 @@
 package utilities;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Functions {
 
@@ -16,6 +19,7 @@ public class Functions {
 	    return true;
 	}
 	
+	
 	public static String cleanString(String line){
 
 		line = line.replaceAll("&.*?;"," ");//remove words occouring with &
@@ -24,6 +28,21 @@ public class Functions {
 		line = line.trim().replaceAll(" +", " ");//remove repeating spaces
 		return line;
 	}
+	
+	
+	public static void createFile(String file, ArrayList<String> arrData)
+            throws IOException {
+        FileWriter writer = new FileWriter(file + ".txt");
+        int size = arrData.size();
+        for (int i=0;i<size;i++) {
+            String str = arrData.get(i).toString();
+            writer.write(str);
+            if(i < size-1){
+                writer.write("\n");
+                }
+        }
+        writer.close();
+    }
 	
 	public static String[] potentialKeywordsFromList(String stringOfWords,String KeywordsFilePath){
 		return new String[]{""};
