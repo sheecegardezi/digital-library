@@ -2,9 +2,20 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/jdbc.jar"/>
+	<classpathentry kind="lib" path="lib/jdbc.jar" sourcepath="lib/edu.mit.jwi_2.4.0_jdk.jar"/>
 	<classpathentry kind="lib" path="lib/opencsv-3.8.jar"/>
 	<classpathentry kind="lib" path="lib/testng-6.0.jar"/>
 	<classpathentry kind="lib" path="lib/univocity-parsers-2.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-api-2.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-api-2.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-api-2.3.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-core-2.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-core-2.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-core-2.3.jar"/>
+	<classpathentry kind="lib" path="lib/edu.mit.jwi_2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/jaws-bin.jar"/>
+	<classpathentry kind="lib" path="lib/jwnl.jar"/>
+	<classpathentry kind="lib" path="lib/extjwnl-1.6.jar" sourcepath="lib/edu.mit.jwi_2.4.0_src.zip"/>
+	<classpathentry kind="lib" path="lib/org-apache-commons-logging.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

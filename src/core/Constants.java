@@ -10,7 +10,11 @@ public final class Constants {
 	public static final String FILE_PATH_DATABASE_XML="./res/xml/database.xml";
 	public static final String FILE_PATH_NOISY_DATA="./res/test/noisey_data.txt";
 
+	public static final String FILE_PATH_LOG_CONFIG="./src/log/log4j2.xml";
 
+	public static final String FILE_PATH_WordNet_2_1="./res/WordNet/2.1/dict/";
+	public static final String FILE_PATH_WordNet_3_0="./res/WordNet/3.0/dict";
+	public static final String FILE_PATH_WordNet_3_1="./res/WordNet/3.1/dict";
 		
 	  // PRIVATE //
 	  /**
