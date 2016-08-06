@@ -3,6 +3,9 @@ package core;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -27,20 +30,24 @@ public class Main {
     	System.setProperty("log4j.configurationFile",Constants.FILE_PATH_LOG_CONFIG);
     	Logger logger = LogManager.getRootLogger();
 
-    	logger.error("testing ERROR level");
-    	logger.debug("testing ERROR level");
-    	logger.info("testing ERROR level");
-    	logger.trace("testing ERROR level");
+//    	logger.error("testing ERROR level");
+//    	logger.debug("testing ERROR level");
+//    	logger.info("testing ERROR level");
+//    	logger.trace("testing ERROR level");
     	
 		//read the orgnal data
 		
 		DatabaseReader DR=new DatabaseReader();
 		
+		ArrayList<String> vocabulary=new ArrayList<String>();
 		ArrayList<String> noisyWords=new ArrayList<String>();
+		ArrayList<String> keyWords=new ArrayList<String>();
+		
 
 		String previousWord="";
 		String nextWord="";
 		String currentWord="";
+		String line="";
 		
 		int counter=0;
 		for(ResearchPaper research_paper:DR.getResearchPapers()){
@@ -52,8 +59,6 @@ public class Main {
 				
 				currentWord=research_paper.getWord_vector().get(i);
 				
-				//get all the words  that are capital
-				
 				if(!Functions.isAlpha(currentWord)){
 					previousWord="";
 					nextWord="";
@@ -64,14 +69,21 @@ public class Main {
 					if((i+1)<research_paper.getWord_vector().size()){
 						nextWord=research_paper.getWord_vector().get(i+1);
 					}
-					
-					noisyWords.add(previousWord+" "+currentWord+" "+nextWord);
-			    	logger.trace(noisyWords.size());
 				}
+			
+				line=previousWord+" "+currentWord+" "+nextWord;
+		    	
+				keyWords.addAll(Functions.extractKeywords(line));
+				noisyWords.add(currentWord);
+
 			}
 		}
-		
+
+		Functions.removeDuplicates(noisyWords);
+		Functions.removeDuplicates(keyWords);
+
 		Functions.createFile(Constants.FILE_PATH_NOISY_DATA, noisyWords);
+		Functions.createFile(Constants.FILE_PATH_KEY_WORDS_DATA, keyWords);
 		
 		//create XML database of papers
 		//ConstructingXMLFile CXML=new ConstructingXMLFile();
