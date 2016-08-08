@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,6 +46,8 @@ public class Main {
 		ArrayList<String> noisyWords=new ArrayList<String>();
 		ArrayList<String> keyWords=new ArrayList<String>();
 		
+		Pattern p = null;
+		Matcher m = null; 
 
 		String previousWord="";
 		String nextWord="";
@@ -53,7 +58,7 @@ public class Main {
 		for(ResearchPaper research_paper:DR.getResearchPapers()){
 			counter++;
 
-	    	logger.info("Number of itrations: "+counter+"/"+DR.getResearchPapers().size());
+//	    	logger.info("Number of itrations: "+counter+"/"+DR.getResearchPapers().size());
 
 			for(int i=0;i<research_paper.getWord_vector().size();i++){
 				
@@ -71,15 +76,29 @@ public class Main {
 					}
 				}
 			
-				line=previousWord+" "+currentWord+" "+nextWord;
+//				line=previousWord+" "+currentWord+" "+nextWord;
+
+
+		    	String subWord=currentWord.trim();
 		    	
-				keyWords.addAll(Functions.extractKeywords(line));
-				noisyWords.add(currentWord);
+		    			
+				if(subWord.endsWith("-")){
+					if(StringUtils.countMatches(subWord, "-")<2){
+						System.out.println(currentWord+": "+subWord.substring(0, subWord.length() - 1)+nextWord.trim());
+						currentWord=subWord.substring(0, subWord.length() - 1)+nextWord.trim();	
+					}
+					
+				}
+				
+				keyWords.add(currentWord);
+				
+				//keyWords.addAll(Functions.extractKeywords(currentWord));
+				//noisyWords.add(currentWord);
 
 			}
 		}
 
-		Functions.removeDuplicates(noisyWords);
+//		Functions.removeDuplicates(noisyWords);
 		Functions.removeDuplicates(keyWords);
 
 		Functions.createFile(Constants.FILE_PATH_NOISY_DATA, noisyWords);
