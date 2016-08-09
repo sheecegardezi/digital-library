@@ -1,12 +1,19 @@
 package utilities;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -76,22 +83,6 @@ public class Functions {
 		return new String[]{""};
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
-	String testString="&lt;I&gt &lt;/I&gt; &lt;I&gt; &lt; &#12; &#15; &#19; &#12; &lt;p&gt; & &. &&&n a polygonal path P with vertices p1, ..., pn in R^d and a real number t&gt;1, a path Q = (pi1, pi2, ... , pik) is a t-distance preserving approximation of P if 1 = i1 &lt; i2 &lt; ... &lt; ik = n and each straight-line edge (pij ; pij+1) of Q ap";	
-	String testString2="D-PLL, known NEURAL PROSTHESES:BY-PASSING DAMAGED NEURO-WIRELESS TECHNOLOGY A Digital Based A.A.E asdasdASDASDBJHasdASDasd";
-	String testString3="1-D2-D 3-D A asdasd B>asdasd";
-	//	System.out.println(cleanString(testString));
-	
-    ArrayList<String> matches=extractKeywords(testString3);
-
-    for(String word:matches){
-
-    	System.out.println(word);
-    		
-    }
-    
-	}
-
 	public static void removeDuplicates(ArrayList<String> capitalWords) {
 		
 		Set<String> capitalWordsSet = new HashSet<>();
@@ -99,6 +90,33 @@ public class Functions {
 		capitalWords.clear();
 		capitalWords.addAll(capitalWordsSet);
 		Collections.sort(capitalWords.subList(1, capitalWords.size()));
-		
 	}
+	
+	public static Map<String, Set<String> > loadVocabulary() throws IOException{
+		
+		File folder = new File("./res/dic/");
+		File[] listOfFiles = folder.listFiles();
+		
+		Map<String, Set<String> > dic = new HashMap<String, Set<String>>();
+		
+		
+		for (File file : listOfFiles) {
+		    if (file.isFile()) {
+		    	
+		    	Set<String> listOfWords = new HashSet<String> ( Files.readAllLines(file.toPath(), Charset.defaultCharset() ));
+		    	
+				dic.put(file.getName().split("[.]")[0], listOfWords);
+
+		    }
+		}
+
+		return dic;
+	}
+	public static void main(String[] args) throws IOException {
+
+		loadVocabulary();
+    
+	}
+
+	
 }
