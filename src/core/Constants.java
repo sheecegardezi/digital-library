@@ -5,8 +5,17 @@ public final class Constants {
 	// PUBLIC //
 	  
 	/** Path to the keyword file  */
-	public static final String FILE_PATH_KEYWORDS="./res/input/keywords";
+	
+	public static final String FILE_PATH_RUNNING_ID="./res/req/id.data";
+	
+	
+	
 	public static final String FILE_PATH_DATA61_CSV="./res/input/nicta_publications_table.csv";
+	public static final String FILE_PATH_MICROSOFT_CSV="./res/input/microsoft_publications_table.csv";
+	public static final String FILE_PATH_JMLR_CSV="./res/input/jmlr_publications_table.csv";
+	public static final String FILE_PATH_GOOGLE_CSV="./res/input/google_publications_table.csv";	
+	
+	public static final String FILE_PATH_KEYWORDS="./res/input/keywords";
 	public static final String FILE_PATH_DATABASE_XML="./res/xml/database.xml";
 	public static final String FILE_PATH_LOG_CONFIG="./src/log/log4j2.xml";
 
@@ -18,6 +27,10 @@ public final class Constants {
 	public static final String FILE_PATH_CAPITAL_WORDS_DATA ="./res/test/capital_word_data.txt";
 	public static final String FILE_PATH_ABBREVIATED_WORDS_DATA = "./res/test/abbreviated_words_data.txt";
 	public static final String FILE_PATH_KEY_WORDS_DATA ="./res/test/key_words_data.txt";
+	public static final String FILE_PATH_KEY_TEMP_DATA ="./res/test/temp_data.txt";
+	
+	
+	
 	
 		
 	  // PRIVATE //

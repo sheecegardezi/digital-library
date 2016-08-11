@@ -1,6 +1,7 @@
 package utilities;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,7 +19,30 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import core.Constants;
+
 public class Functions {
+	
+	
+	
+	//read id required to with with each entry of a reserch paer in a data used to merge different databases togather
+	public static String getCurrentID() throws IOException{
+		
+		
+		BufferedReader br = new BufferedReader(new FileReader(Constants.FILE_PATH_RUNNING_ID));
+		String line = br.readLine();
+		br.close();
+
+		return line.trim();
+	}
+	
+	public static void setCurrentID(String id) throws IOException{
+		
+		BufferedWriter writer = new BufferedWriter( new FileWriter( Constants.FILE_PATH_RUNNING_ID));
+		writer.write(id);
+		writer.close();
+		
+	}
 
 	public static boolean isAlpha(String name) {
 	    char[] chars = name.toCharArray();
@@ -30,6 +54,24 @@ public class Functions {
 	    return true;
 	}
 
+	public static boolean isAlphaExpectLastChar(String name) {
+	    char[] chars = name.toCharArray();
+	    
+	    if(chars.length==1){
+	    	if(!Character.isLetter(chars[0])){
+	            return false;
+	    	}
+	    }
+	    
+	    for ( int i=0;i<chars.length-1;i++) {
+	    	char c =chars[i];
+	    	if(!Character.isLetter(c)) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+	
 	public static String cleanString(String line){
 
 		line = line.replaceAll("&.*?;"," ");//remove words occouring with &
@@ -89,7 +131,7 @@ public class Functions {
 		capitalWordsSet.addAll(capitalWords);
 		capitalWords.clear();
 		capitalWords.addAll(capitalWordsSet);
-		Collections.sort(capitalWords.subList(1, capitalWords.size()));
+		Collections.sort(capitalWords.subList(0, capitalWords.size()));
 	}
 	
 	public static Map<String, Set<String> > loadVocabulary() throws IOException{
@@ -116,6 +158,96 @@ public class Functions {
 
 		loadVocabulary();
     
+	}
+
+	public static ArrayList<String> convertStringArrayToArrayList(String[] stringArray) {
+		ArrayList<String> stringArrayList=new ArrayList<String>();  
+		
+		for(String element:stringArray){
+			stringArrayList.add(element);
+		}
+		return stringArrayList;
+	
+	}
+
+	public static boolean isNonAlpha(String word) {
+		char[] chars = word.toCharArray();
+	    for (char c : chars) {
+	        if(Character.isLetter(c)) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+
+	public static boolean isHypenAtRightEnd(String word) {
+
+		char[] chars = word.toCharArray();
+		if(chars[chars.length-1]=='-'){
+			return true;
+		}
+	    
+		return false;
+	}
+
+	public static boolean isAlphaAndHypen(String word) {
+		char[] chars = word.toCharArray();
+	    for (char c : chars) {
+	        if(!(Character.isLetter(c) || c=='-')) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+
+	public static boolean isAlphaAndHypenExpLastChar(String word) {
+		char[] chars = word.toCharArray();
+	    for(int i=0;i<chars.length-1;i++){
+	    	char c=chars[i];
+	        if(!(Character.isLetter(c) || c=='-')) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+
+	public static boolean isHypenAtLeftEnd(String word) {
+		char[] chars = word.toCharArray();
+		if(chars[0]=='-'){
+			return true;
+		}
+	    return false;
+	}
+
+	public static String standard_cleaning(String word) {
+
+		//delete charcters like brackets maybe in start!!!
+		//create a recursve checker for rules!!!! after applying each rule :'(
+
+		word=word.trim();
+		
+		word=removeRepatingCharacters(word);
+		
+		return word;
+	}
+
+	private static String removeRepatingCharacters(String word) {
+
+		String newWord="";
+		char[] chars = word.toCharArray();
+	    for(int i=0;i<chars.length-1;i++){
+	    	char c=chars[i];
+	    	if(Character.isLetter(c) || Character.isDigit(c) ){
+	    		newWord=newWord+c;
+	    	}
+	    	else if(c!=chars[i+1]){
+	    		newWord=newWord+c;	    		
+	    	}
+	    }
+	    if(chars.length>0){
+		    newWord=newWord+chars[chars.length-1];
+	    }
+		return newWord;
 	}
 
 	

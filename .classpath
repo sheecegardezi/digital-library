@@ -18,5 +18,8 @@
 	<classpathentry kind="lib" path="lib/extjwnl-1.6.jar" sourcepath="lib/edu.mit.jwi_2.4.0_src.zip"/>
 	<classpathentry kind="lib" path="lib/org-apache-commons-logging.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-csv-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-csv-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/kryo-2.24.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

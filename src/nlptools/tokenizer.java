@@ -1,6 +1,7 @@
 package nlptools;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +22,7 @@ public class tokenizer {
 		};		
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) throws IOException{
 		
 		DatabaseReader DR=new DatabaseReader();
 		String currentWord="";

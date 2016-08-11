@@ -6,8 +6,7 @@ import com.univocity.parsers.csv.*;
 
 import core.Constants;
 import datastructures.ResearchPaper;
-
- 
+import utilities.Functions;
 
 import java.io.*;
 import java.math.*;
@@ -18,12 +17,13 @@ import java.util.Map.*;
 public class DATA61 implements HandlingDatabase{
 
 	
-	String title_field_name;
-	String authors_field_name;
-	String keywords_field_name;
-	String abstracts_field_name;
-	String date_field_name;
+	String title_field_name="title";
+	String authors_field_name="authors";
+	String keywords_field_name="keywords";
+	String abstracts_field_name="abstract";
+	String date_field_name="updated_at";
 	String publisher="Data61";
+	
 	
 	
 	public String getPublisher() {
@@ -31,12 +31,8 @@ public class DATA61 implements HandlingDatabase{
 	}
 
 
-	public DATA61(String title,String authors,String keywords,String abstracts,String date){
-		setTitleFieldName( title);
-		setAuthorsFieldName( authors);
-		setKeywordsFieldName( keywords);
-		setAbstractsFieldName( abstracts);
-		setDateFieldName( date);
+	public DATA61(){
+
 	}
 
 	
@@ -45,19 +41,10 @@ public class DATA61 implements HandlingDatabase{
 	}
 
 
-	public void setTitleFieldName(String title) {
-		this.title_field_name = title;
-	}
-
-
 	public String getAuthorsFieldName() {
 		return authors_field_name;
 	}
 
-
-	public void setAuthorsFieldName(String authors) {
-		this.authors_field_name = authors;
-	}
 
 
 	public String getKeywordsFieldName() {
@@ -65,18 +52,8 @@ public class DATA61 implements HandlingDatabase{
 	}
 
 
-	public void setKeywordsFieldName(String keywords) {
-		this.keywords_field_name = keywords;
-	}
-
-
 	public String getAbstractsFieldName() {
 		return abstracts_field_name;
-	}
-
-
-	public void setAbstractsFieldName(String abstracts) {
-		this.abstracts_field_name = abstracts;
 	}
 
 
@@ -93,7 +70,6 @@ public class DATA61 implements HandlingDatabase{
 	@Override
 	public String getFormatedTitle(String potentialTitle){
 		potentialTitle=utilities.Functions.cleanString(potentialTitle);
-
 		return potentialTitle;
 	}
 
@@ -124,14 +100,7 @@ public class DATA61 implements HandlingDatabase{
 		return Authors;
 	}
 	
-	ArrayList<String> addStringArray(String[] stringArray){
-		ArrayList<String> stringArrayList=new ArrayList<String>();  
-		
-		for(String element:stringArray){
-			stringArrayList.add(element);
-		}
-		return stringArrayList;
-	}
+	
 	//TODO store all the keywords in a file read the file for keywords and then check if any of the words are in the string in question and add it to the keyword list return the keyword string after all comparisions
 	@Override
 	public ArrayList<String> getFormatedKeywords(String potentialKeywords){
@@ -140,26 +109,26 @@ public class DATA61 implements HandlingDatabase{
 		potentialKeywords=utilities.Functions.cleanString(potentialKeywords);
 
 		if(potentialKeywords==null||potentialKeywords.contains("NULL")){
-				return addStringArray(new String[0]);
+				return Functions.convertStringArrayToArrayList(new String[0]);
 		}
 		else if(!potentialKeywords.toLowerCase().contains(" ")){
 						
-				return addStringArray(new String[]{potentialKeywords});
+				return Functions.convertStringArrayToArrayList(new String[]{potentialKeywords});
 		}
 		else if(potentialKeywords.toLowerCase().split("(,)").length>1){
-			return addStringArray(potentialKeywords.split("(,)"));
+			return Functions.convertStringArrayToArrayList(potentialKeywords.split("(,)"));
 		}
 		else if(potentialKeywords.toLowerCase().split("(-)").length>1){
-			return addStringArray(potentialKeywords.split("(-)"));
+			return Functions.convertStringArrayToArrayList(potentialKeywords.split("(-)"));
 		}
 		else if(potentialKeywords.toLowerCase().split("(;)").length>1){
-			return addStringArray(potentialKeywords.split("(;)"));
+			return Functions.convertStringArrayToArrayList(potentialKeywords.split("(;)"));
 		}
 		else if(potentialKeywords.toLowerCase().split("(/)").length>1){
-			return addStringArray(potentialKeywords.split("(/)"));
+			return Functions.convertStringArrayToArrayList(potentialKeywords.split("(/)"));
 		}
 		//check if the word combination is in the list of key words
-		return addStringArray(utilities.Functions.potentialKeywordsFromList(potentialKeywords,Constants.FILE_PATH_KEYWORDS));
+		return Functions.convertStringArrayToArrayList(utilities.Functions.potentialKeywordsFromList(potentialKeywords,Constants.FILE_PATH_KEYWORDS));
 		
 	}
 
@@ -192,6 +161,11 @@ public class DATA61 implements HandlingDatabase{
 		}
 		
 		return potentialDate;
+	}
+
+
+	public String getCSVFilePath() {
+		return Constants.FILE_PATH_DATA61_CSV;
 	}
 
 
