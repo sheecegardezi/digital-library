@@ -1,32 +1,33 @@
 package Serilaze;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Input;
-import com.esotericsoftware.kryo.io.Output;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import datastructures.ResearchPaper;
 
 public class io {
 
-	
-		public static Object read(String FileName) throws FileNotFoundException{
-		
-			
-			//Vector3d retrievedObject=null;
-			FileName="./res/test/rp.ser";
-			Input input = new Input( new FileInputStream(FileName));
-			Kryo kryo=new Kryo();
-	        return kryo.readClassAndObject(input);
-			//retrievedObject=(Vector3d)kryo.readClassAndObject(input);
-		}
-		
-		//        Vector3d someObject=new Vector3d(1,2,3);
-		public static void write(Object someObject, String FileName) throws FileNotFoundException{
-			FileName="./res/test/rp.ser";
-			Output output = new Output(new FileOutputStream(FileName));
-	        Kryo kryo=new Kryo();
-	        kryo.writeClassAndObject(output, someObject);
-		}
+	public static ArrayList<ResearchPaper> read(String fileName) throws IOException, ClassNotFoundException {
+
+		ArrayList<ResearchPaper> researchPapers = null;
+		FileInputStream fileIn = new FileInputStream(fileName);
+		ObjectInputStream in = new ObjectInputStream(fileIn);
+		researchPapers = (ArrayList<ResearchPaper>) in.readObject();
+		in.close();
+		fileIn.close();
+		return researchPapers;
+	}
+
+	// write
+	public static void write(ArrayList<ResearchPaper> ResearchPapers, String fileName) throws IOException {
+
+		FileOutputStream fileOut = new FileOutputStream(fileName);
+		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		out.writeObject(ResearchPapers);
+		out.close();
+		fileOut.close();
+	}
 }

@@ -1,11 +1,15 @@
 package datamanipulating;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,15 +17,16 @@ import com.univocity.parsers.common.record.Record;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
+import core.Constants;
 import datastructures.ResearchPaper;
 import utilities.Functions;
 
 public class ReadCSV {
 
-	String id = Functions.getCurrentID();
+	int id;
 	String title;
-	ArrayList<String> authors = new ArrayList<String>();
-	ArrayList<String> keywords = new ArrayList<String>();
+	ArrayList<String> authors;
+	ArrayList<String> keywords;
 	String abstracts;
 	String date;
 	String publisher;
@@ -31,11 +36,22 @@ public class ReadCSV {
 	CsvParser parser;
 
 	ArrayList<ResearchPaper> ResearchPapers;
+	Logger logger;
+	
+	
+	int batchNo;
 
-	public ReadCSV(HandlingDatabase database) throws IOException {
+	public ReadCSV(HandlingDatabase database,int batchSize) throws IOException {
 
+		id=Integer.parseInt(Functions.getCurrentID());
+
+		authors = new ArrayList<String>();
+		keywords = new ArrayList<String>();
 		ResearchPapers = new ArrayList<ResearchPaper>();
-		Logger logger = LogManager.getRootLogger();
+		
+		batchNo=0;
+		
+		logger = LogManager.getRootLogger();
 
 		CsvParserSettings settings = new CsvParserSettings();
 		settings.setMaxCharsPerColumn(20000);
@@ -53,31 +69,52 @@ public class ReadCSV {
 			if (counter % 500 == 0) {
 				logger.info("Number of Records Read:" + counter + "/" + allRecords.size());
 			}
+			
+			if(counter%batchSize==0){
+				int batchNo=Integer.parseInt(Functions.getCurrentBatchNumber());
+				batchNo=batchNo+1;
+				
+				String fileName=Constants.BATCH_FILE_DIRECTORY+batchNo+".ser";
+				Serilaze.io.write(ResearchPapers, fileName);
+
+				Functions.setCurrentBatchNumber(batchNo+"");
+				ResearchPapers=new ArrayList<ResearchPaper>();
+			}
+
+			id = id+1;
+
+
 			title = record.getString(database.getTitleFieldName());
+			if(title==null){
+				title="";
+			}
 			authors.add(record.getString(database.getAuthorsFieldName()));
 			keywords.add(record.getString(database.getKeywordsFieldName()));
 			abstracts = record.getString(database.getAbstractsFieldName());
+			if(abstracts==null){
+				abstracts="";
+			}
 			date = record.getString(database.getDateFieldName());
 			publisher = database.getPublisher();
 
-			ResearchPaper research_paper = new ResearchPaper(id, title, authors, keywords, abstracts, date, publisher);
+			ResearchPaper research_paper = new ResearchPaper(id+"", title, authors, keywords, abstracts, date, publisher);
 			ResearchPapers.add(research_paper);
 
 		}
+		
+		//save the data from the last batch
+		int batchNo=Integer.parseInt(Functions.getCurrentBatchNumber());
+		batchNo=batchNo+1;
+		
+		String fileName=Constants.BATCH_FILE_DIRECTORY+batchNo+".ser";
+		Serilaze.io.write(ResearchPapers, fileName);
+
+		Functions.setCurrentBatchNumber(batchNo+"");
+		ResearchPapers=new ArrayList<ResearchPaper>();
+
 		parser.stopParsing();
-		Functions.setCurrentID(id);
+		Functions.setCurrentID(id+"");
 
-	}// end reading and writing data to datastructure
-
-	public ArrayList<ResearchPaper> getResearchPapers() {
-		return ResearchPapers;
-	}
-
-	String getNewID() {
-
-		// increment the value of the id and then return the incremented value
-		this.id = Integer.toString(Integer.parseInt(this.id) + 1);
-		return this.id;
-	}
+	}// end reading and writing data to dataStructure
 
 }

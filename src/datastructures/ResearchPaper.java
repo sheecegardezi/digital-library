@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class ResearchPaper{
+public class ResearchPaper  implements java.io.Serializable{
 
 	String Id;
 	String Title;
@@ -25,21 +25,19 @@ public class ResearchPaper{
 		this.Date=Date;
 		this.Publisher=Publisher;
 		
-		this.word_vector=new ArrayList<String>();
-		
-		word_vector.addAll(Arrays.asList(Title.trim().split("\\s+")));
-		word_vector.addAll(Arrays.asList(Abstracts.trim().split("\\s+")));
-		
-		for(String keyword:Keywords){
-			word_vector.addAll(Arrays.asList(keyword.trim().split("\\s+")));
-		}		
+		this.word_vector=new ArrayList<String>();		
 
 	}
 
 	public ArrayList<String> getWord_vector() {
 		return word_vector;
 	}
-
+	public void addWord_vector(ArrayList<String> words) {
+		this.word_vector.addAll(words);
+	}
+	public void addWord_vector(String words) {
+		this.word_vector.add(words);
+	}
 	public ResearchPaper() {
 		
 	}
