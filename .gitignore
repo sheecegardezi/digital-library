@@ -6,6 +6,7 @@
 # Package Files #
 *.ear
 *.jar
+*.data
 
 # Can ignore specific files
 .DS_Store
