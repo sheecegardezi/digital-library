@@ -11,7 +11,9 @@ import net.didion.jwnl.JWNLException;
 public class JWNLApi {
 	
 	public static boolean isWordCorrect(String term){
-	
+		//JWNLApi
+		System.setProperty("wordnet.database.dir", Constants.FILE_PATH_WordNet_2_1);
+
 		WordNetDatabase database = WordNetDatabase.getFileInstance();
 
 		Synset[] synsets = database.getSynsets(term);
@@ -25,9 +27,8 @@ public class JWNLApi {
 	
 	public static void main(String[] args) throws IOException, JWNLException{
 		
-		System.setProperty("wordnet.database.dir", Constants.FILE_PATH_WordNet_2_1);
 		
-		System.out.println(isWordCorrect("Sheece"));
+		System.out.println(isWordCorrect("Circumstantial"));
 		System.out.println(isWordCorrect("love"));
 			
 //		Synset[] synsets = database.getSynsets("fly", SynsetType.ADJECTIVE); 

@@ -5,7 +5,15 @@
 
 # Package Files #
 *.ear
+*.jar
+
+# Can ignore specific files
+.DS_Store
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /bin/
+
+
+# Can also ignore all directories and files in a directory.
+temp/**/* 
