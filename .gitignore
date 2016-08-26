@@ -5,11 +5,11 @@
 
 # Package Files #
 *.ear
-*.jar
 *.data
 
 # Can ignore specific files
 .DS_Store
+stanford-corenlp-3.6.0-models.jar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -17,3 +17,4 @@ hs_err_pid*
 
 
 # Can also ignore all directories and files in a directory.
+/target/
