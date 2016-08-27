@@ -91,6 +91,18 @@
   		<artifactId>rita</artifactId>
   		<version>1.0</version>
   	</dependency>
+	<dependency>
+	    <groupId>org.apache.lucene</groupId>
+	    <artifactId>lucene-core</artifactId>
+	    <version>6.2.0</version>
+	</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers -->
+<dependency>
+    <groupId>org.apache.lucene</groupId>
+    <artifactId>lucene-analyzers</artifactId>
+    <version>3.6.2</version>
+</dependency>
+		  	
   </dependencies>
   <repositories>
     <repository>
