@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import core.Constants;
 import datastructures.ResearchPaper;
+import datastructures.Word;
 import utilities.Functions;
 
 public class Main {
@@ -49,22 +50,22 @@ public class Main {
 
 				String text = researchPaper.getAbstract();
 
-				for(String potentialWords:standfordnlp.utlities.getTokens(text)){
-					if(	wordnet.Utlities.isWordCorrect(potentialWords)){
+				for(Word potentialWords:standfordnlp.utlities.getTokens(text)){
+					if(	wordnet.Utlities.isWordCorrect(potentialWords.getToken())){
 						researchPaper.addWord_vector(potentialWords);
 					}
 				}
 				text = researchPaper.getKeyword();
 
-				for(String potentialWords:standfordnlp.utlities.getTokens(text)){
-					if(	wordnet.Utlities.isWordCorrect(potentialWords)){
+				for(Word potentialWords:standfordnlp.utlities.getTokens(text)){
+					if(	wordnet.Utlities.isWordCorrect(potentialWords.getToken())){
 						researchPaper.addWord_vector(potentialWords);
 					}
 				}
 				text = researchPaper.getTitle();
 
-				for(String potentialWords:standfordnlp.utlities.getTokens(text)){
-					if(	wordnet.Utlities.isWordCorrect(potentialWords)){
+				for(Word potentialWords:standfordnlp.utlities.getTokens(text)){
+					if(	wordnet.Utlities.isWordCorrect(potentialWords.getToken())){
 						researchPaper.addWord_vector(potentialWords);
 					}
 				}

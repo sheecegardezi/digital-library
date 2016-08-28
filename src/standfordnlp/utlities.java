@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import datastructures.Word;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
@@ -15,9 +16,10 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class utlities {
 
-	public static ArrayList<String> getTokens(String text) {
+	public static ArrayList<Word> getTokens(String text) {
 	
-		ArrayList<String> tokens=new ArrayList<String>();
+		ArrayList<Word> tokens=new ArrayList<Word>();
+		
 		// creates a StanfordCoreNLP object, with POS tagging, lemmatization,
 		// NER, parsing, and coreference resolution
 		Properties props = new Properties();
@@ -42,7 +44,8 @@ public class utlities {
 			// a CoreLabel is a CoreMap with additional token-specific methods
 			for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 				// this is the text of the token
-				tokens.add(token.get(TextAnnotation.class));
+				Word word=new Word(token.get(TextAnnotation.class),token.get(PartOfSpeechAnnotation.class));
+				tokens.add(word);
 
 			}
 

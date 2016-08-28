@@ -20,11 +20,11 @@ public class Main {
 	public static void main(String[] args){
 	// creates a StanfordCoreNLP object, with POS tagging, lemmatization, NER, parsing, and coreference resolution 
 	Properties props = new Properties();
-	props.put("annotators", "tokenize, ssplit, pos");
+	props.put("annotators", "tokenize,pos");
 	StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
 	// read some text in the text variable
-	String text = "asdasda asd as dasdas das das wefergv";
+	String text = "asdasda";
 
 	// create an empty Annotation just with the given text
 	Annotation document = new Annotation(text);

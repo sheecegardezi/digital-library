@@ -14,7 +14,7 @@ public class ResearchPaper  implements java.io.Serializable{
 	String Abstracts;
 	String Date;
 	String Publisher;
-	ArrayList<String> word_vector;
+	ArrayList<Word> word_vector;
 	
 	public ResearchPaper(String Id,String Title,ArrayList<String> Authors,ArrayList<String> Keywords,String Abstract,String Date,String Publisher){
 		this.Id=Id;
@@ -25,17 +25,17 @@ public class ResearchPaper  implements java.io.Serializable{
 		this.Date=Date;
 		this.Publisher=Publisher;
 		
-		this.word_vector=new ArrayList<String>();		
+		this.word_vector=new ArrayList<Word>();		
 
 	}
 
-	public ArrayList<String> getWord_vector() {
+	public ArrayList<Word> getWord_vector() {
 		return word_vector;
 	}
-	public void addWord_vector(ArrayList<String> words) {
+	public void addWord_vector(ArrayList<Word> words) {
 		this.word_vector.addAll(words);
 	}
-	public void addWord_vector(String words) {
+	public void addWord_vector(Word words) {
 		this.word_vector.add(words);
 	}
 	public ResearchPaper() {

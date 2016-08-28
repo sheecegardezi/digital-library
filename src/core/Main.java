@@ -15,7 +15,7 @@ public class Main {
 		// its going to read all the csv and store them in batches files in
 		// processing
 		// only yhe abstract is used to partition into words
-//		 datamanipulating.Main DataReader = new datamanipulating.Main();
+		 datamanipulating.Main DataReader = new datamanipulating.Main();
 
 		// read one of the reasceh paer and display
 
