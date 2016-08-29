@@ -117,10 +117,10 @@
 		    <dependency>
 		        <groupId>jdk.tools</groupId>
 		        <artifactId>jdk.tools</artifactId>
-		        <version>${java.version}</version>
+		        <version>1.8.0</version>
 		        <scope>system</scope>
-		        <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-    		</dependency>
+		    <systemPath>${project.basedir}/local-maven-repo/jdk/tools/jdk.tools/1.8.0/jdk.tools-1.8.0.jar</systemPath>
+    	</dependency>
     		
     	<dependency>
 		    <groupId>edu.drexel</groupId>
