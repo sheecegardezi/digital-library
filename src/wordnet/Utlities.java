@@ -12,7 +12,15 @@ public class Utlities {
 
 		WordNetDatabase database = WordNetDatabase.getFileInstance();
 
-		Synset[] synsets = database.getSynsets(term);
+		Synset[] synsets = null;
+
+		if(term!=null){
+			synsets = database.getSynsets(term);	
+		}
+		else{
+			return false;
+		}
+		
 		if(synsets.length>0){
 				return true;
 		}

@@ -19,12 +19,12 @@ public class Main {
 
 	public static void main(String[] args){
 	// creates a StanfordCoreNLP object, with POS tagging, lemmatization, NER, parsing, and coreference resolution 
-	Properties props = new Properties();
-	props.put("annotators", "tokenize,pos");
-	StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		Properties props = new Properties();
+		props.put("annotators", "tokenize, ssplit, pos");
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
 	// read some text in the text variable
-	String text = "asdasda";
+	String text = "a CoreMap is essentially a Map that uses class objects as keys and has values with custom types";
 
 	// create an empty Annotation just with the given text
 	Annotation document = new Annotation(text);

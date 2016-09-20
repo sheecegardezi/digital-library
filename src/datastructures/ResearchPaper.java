@@ -14,7 +14,7 @@ public class ResearchPaper  implements java.io.Serializable{
 	String Abstracts;
 	String Date;
 	String Publisher;
-	ArrayList<Word> word_vector;
+	ArrayList<String> word_vector;
 	
 	public ResearchPaper(String Id,String Title,ArrayList<String> Authors,ArrayList<String> Keywords,String Abstract,String Date,String Publisher){
 		this.Id=Id;
@@ -25,17 +25,17 @@ public class ResearchPaper  implements java.io.Serializable{
 		this.Date=Date;
 		this.Publisher=Publisher;
 		
-		this.word_vector=new ArrayList<Word>();		
+		this.word_vector=new ArrayList<String>();		
 
 	}
 
-	public ArrayList<Word> getWord_vector() {
+	public ArrayList<String> getWord_vector() {
 		return word_vector;
 	}
-	public void addWord_vector(ArrayList<Word> words) {
+	public void addWord_vector(ArrayList<String> words) {
 		this.word_vector.addAll(words);
 	}
-	public void addWord_vector(Word words) {
+	public void addWord_vector(String words) {
 		this.word_vector.add(words);
 	}
 	public ResearchPaper() {
@@ -105,9 +105,9 @@ public class ResearchPaper  implements java.io.Serializable{
 	public String toString() {
 		
 		return
-		StringUtils.substring(Id,0,50) +'\n'+
-		StringUtils.substring(Title,0,50)+'\n'+
-		StringUtils.substring(Abstracts,0,50)+'\n'+
+		"Id"+StringUtils.substring(Id,0,50) +'\n'+
+		"Title"+StringUtils.substring(Title,0,50)+'\n'+
+		"Abstracts"+StringUtils.substring(Abstracts,0,50)+'\n'+
 		Date+'\n'+
 		Publisher+'\n'+
 		getAuthor()+'\n'+

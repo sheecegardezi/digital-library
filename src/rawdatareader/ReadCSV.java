@@ -1,4 +1,4 @@
-package datamanipulating;
+package rawdatareader;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -8,6 +8,9 @@ import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -98,7 +101,12 @@ public class ReadCSV {
 			publisher = database.getPublisher();
 
 			ResearchPaper research_paper = new ResearchPaper(id+"", title, authors, keywords, abstracts, date, publisher);
-			ResearchPapers.add(research_paper);
+			
+			//conditions to ignore the paper
+			if(title.length()>5||abstracts.length()>20||date.length()>2){
+				ResearchPapers.add(research_paper);	
+			}
+			
 
 		}
 		
@@ -117,4 +125,13 @@ public class ReadCSV {
 
 	}// end reading and writing data to dataStructure
 
+	public static void main(String[] args) throws ClassNotFoundException, ParserConfigurationException, TransformerException, IOException{
+//		HandlingDatabase data61 = new DATA61();
+//		HandlingDatabase microsoft = new MICROSOFT();
+//		HandlingDatabase google = new GOOGLE();
+//		HandlingDatabase jmlr = new JMLR();
+//		
+//		ReadCSV DR = new ReadCSV(data61, Constants.BATCH_SIZE);
+
+	}
 }

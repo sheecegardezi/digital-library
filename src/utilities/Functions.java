@@ -20,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import core.Constants;
+import java.util.Scanner; 
 
 public class Functions {
 
@@ -182,4 +183,12 @@ public class Functions {
         
         return listOfFile;
     }
+	
+	public static  void SystemPause(){
+
+		Scanner scan= new Scanner(System.in);
+		
+		System.out.print("Press any key to continue . . . ");
+		scan.nextLine();
+	}
 }

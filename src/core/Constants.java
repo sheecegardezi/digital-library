@@ -27,7 +27,7 @@ public final class Constants {
 	public static final String FILE_PATH_KEY_WORDS_DATA ="./res/test/key_words_data.txt";
 	public static final String FILE_PATH_KEY_TEMP_DATA ="./res/test/temp_data.txt";
 	
-	public static final String BATCH_FILE_DIRECTORY ="./res/process/";
+	public static final String BATCH_FILE_DIRECTORY ="res/process/";
 	public static final String FILE_PATH_RUNNING_BATCH_NUMBER ="./res/req/batch.data";
 	
 	public static final int BATCH_SIZE =500;

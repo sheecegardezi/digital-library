@@ -1,4 +1,4 @@
-package datamanipulating;
+package rawdatareader;
 
 import java.io.Reader;
 import java.util.ArrayList;

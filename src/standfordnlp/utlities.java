@@ -16,17 +16,16 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class utlities {
 
-	public static ArrayList<Word> getTokens(String text) {
-	
-		ArrayList<Word> tokens=new ArrayList<Word>();
-		
+	public static ArrayList<String> getTokens(String text) {
+
+		ArrayList<String> tokens = new ArrayList<String>();
+
 		// creates a StanfordCoreNLP object, with POS tagging, lemmatization,
 		// NER, parsing, and coreference resolution
 		Properties props = new Properties();
 		props.put("annotators", "tokenize, ssplit, pos");
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
-		// read some text in the text variable
 
 		// create an empty Annotation just with the given text
 		Annotation document = new Annotation(text);
@@ -44,14 +43,22 @@ public class utlities {
 			// a CoreLabel is a CoreMap with additional token-specific methods
 			for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 				// this is the text of the token
-				Word word=new Word(token.get(TextAnnotation.class),token.get(PartOfSpeechAnnotation.class));
-				tokens.add(word);
+
+				tokens.add(token.get(TextAnnotation.class));
 
 			}
 
 		}
 		return tokens;
 
+	}
+
+	public static void main(String[] args) {
+		String text = "a CoreMap is essentially a Map that uses class objects as keys and has values with custom types";
+		for (String token : getTokens(text)) {
+			System.out.println(token);
+
+		}
 	}
 
 }

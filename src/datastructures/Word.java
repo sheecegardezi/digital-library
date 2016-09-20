@@ -23,4 +23,10 @@ public class Word {
 		this.pos = pos;
 	}
 
+
+	@Override
+	public String toString() {
+		return token;
+	}
+
 }

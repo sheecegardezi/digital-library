@@ -1,4 +1,4 @@
-package datamanipulating;
+package rawdatareader;
 
 
 import com.univocity.parsers.common.record.Record;
